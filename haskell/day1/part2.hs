@@ -12,6 +12,7 @@ wordss s = case dropWhile isSep s of
     s' -> w : wordss s'' where (w, s'') = break isSep s'
 
 
+count :: (Foldable t, Eq a) => a -> t a -> Int
 count n = foldr (\ x -> (+) (fromEnum (x == n))) 0
 
 main :: IO ()
