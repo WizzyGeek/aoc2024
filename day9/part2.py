@@ -54,7 +54,7 @@ while files:
 
     newalloc.append(newfile)
 
-print(newalloc)
+# print(newalloc)
 
 s = 0
 for much, where, what in newalloc:

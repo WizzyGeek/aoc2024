@@ -1,40 +1,46 @@
 import enum
 import wafle as wf
-from itertools import dropwhile, takewhile
+from itertools import dropwhile, repeat, takewhile, chain
 from collections import defaultdict
 
 p = wf.M(open("in.txt", "r").read()) | str.strip >= list
 
 c = [None] * (len(p) * 10)
 
-print(c)
+# print(c)
 k = True
 l = 0
 f = 0
-free = 0
-for _, i in enumerate(p):
+free = []
+ff = 0
+for i in p:
     if k:
-        for j in range(int(i)):
-            c[l] = f
-            l += 1
+        c[l:(l+int(i))] = repeat(f, int(i))
         f += 1
     else:
-        l += int(i)
-        free += int(i)
+        ff += int(i)
+        free.append(range(l,l+int(i)))
+
+    l += int(i)
     k = not k
 
 l = l - 1
 
-for _ in range(free):
+fpos = chain.from_iterable(free)
+
+for _ in range(ff):
     f = c[l]
-    pos = c.index(None)
-    if pos < l:
-        c[pos] = f
-        c[l] = None
-        l = l - 1
+    if f != None:
+        pos = next(fpos)
+        if pos < l:
+            c[pos] = f
+            c[l] = None
+            l = l - 1
+        else:
+            # print("WTF", c, pos, f)
+            break
     else:
-        print("WTF", c, pos, f)
-        break
+        l = l - 1
 
 s = 0
 for i, j in enumerate(c):
