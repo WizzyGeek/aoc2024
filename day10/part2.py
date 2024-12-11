@@ -3,7 +3,7 @@ from operator import getitem
 import wafle as wf
 from itertools import chain
 
-board = wf.M(open("in.txt", "r").readlines()) | str.strip | (lambda k: wf.M(k) | int >= list) >= list
+board = wf.M(open("ex2.txt", "r").readlines()) | str.strip | (lambda k: wf.M(k) | int >= list) >= list
 
 mx = len(board[0])
 my = len(board)
@@ -30,9 +30,7 @@ ecnf = ecxf(9)
 
 c2bs = dict(ecnf
              .apply(enumerate)
-             .map(reversed)
-             .map(tuple)
-             .map(lambda k: (k[0], 1 << k[1]))
+             .map(lambda k: (k[1], 1 << k[0]))
              )
 
 def isvalid(c: complex):
