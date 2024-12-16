@@ -85,7 +85,7 @@ for p, v in zip(ps, vs):
 print("\n".join("".join(ch for ch in row) for row in bo))
 print(ms)
 
-# Visual try
+# Visual try, I stopped right before the colution lol
 # now = time.time()
 # try:
 #     for s in range(1, mx * my + 1):
