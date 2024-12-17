@@ -4,7 +4,7 @@ from functools import cache
 import wafle as wf
 from itertools import chain
 
-board = wf.M(open("day16/in.txt", "r").readlines()) | str.strip | list >= list
+board = wf.M(open("day16/ex.txt", "r").readlines()) | str.strip | list >= list
 
 mx = len(board[0])
 my = len(board)
@@ -31,8 +31,6 @@ def estimate_cost(p):
     return 100 * (abs(p.real - end.real) + abs(p.real - end.real)) + 1500 * (end.imag != end.imag) + 1500 * (end.real != end.real) + abs(p.real) + abs(p - end)
 
 def make_rotations(node):
-    if getch(node.p + node.v) != "#":
-        yield 1
     if getch(node.p + node.v * 1j) != "#":
         yield 1j
     if getch(node.p + node.v * -1j) != "#":
@@ -51,7 +49,7 @@ mn = ()
 q = PriorityQueue()
 q.put_nowait(Node(estimate_cost(start), 0, start, 1+0j))
 
-while q:
+while not q.empty():
     state = q.get_nowait()
     visited[state.p] = min(visited.get(state.p, inf), state.cost)
     strict_visited[(state.p, state.v)] = min(strict_visited.get((state.p, state.v), inf), state.cost)
