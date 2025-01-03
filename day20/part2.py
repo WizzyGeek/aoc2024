@@ -5,7 +5,7 @@ from typing import Any
 import wafle as wf
 from itertools import chain, product
 
-board = wf.M(open("day20/in.txt", "r").readlines()) | str.strip | list >= list
+board = wf.M(open("day20/ex2.txt", "r").readlines()) | str.strip | list >= list
 
 mx = len(board[0])
 my = len(board)
@@ -103,10 +103,10 @@ for k, cost in visited.items():
         if getch(k2) != "#":
             savings = (visited[k2] - cost) - int(abs(d.real) + abs(d.imag))
 
-        if savings >= 100:
+        if savings >= 30:
             sm += 1
-            # st[savings] += 1
+            st[savings] += 1
             # print(k, k2)
 
-# print(st)
+print(st)
 print(sm)
